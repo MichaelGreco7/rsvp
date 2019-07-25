@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 
-function App() { 
+class App extends Component {
+
+  state = {
+    guest: [
+      {
+        name: 'Tyler',
+        isConfirmed: false
+      },
+      {
+        name: 'Anna',
+        isConfirmed: true
+      }
+    ]
+  }
+
+getTotalInvited = () => this.state.guest.length;
+// getAttendingGuest = () =>
+// getUnconfirmedGuest = () =>
+
+  render() {
   return (
     <div className="App">
       <header>
@@ -64,6 +83,7 @@ function App() {
       </div>
     </div>
   );
+}
 }
 
 
