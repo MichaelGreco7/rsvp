@@ -1,27 +1,45 @@
 import React, { Component } from 'react';
 import './App.css';
+import GuestList from './GuestList';
 
 class App extends Component {
 
   state = {
-    guest: [
+    guests: [
       {
         name: 'Tyler',
-        isConfirmed: false
+        isConfirmed: false,
       },
       {
         name: 'Anna',
-        isConfirmed: true
+        isConfirmed: true,
+      },
+      {
+        name: 'Zach',
+        isConfirmed: false,
       }
     ]
   }
 
-getTotalInvited = () => this.state.guest.length;
-// getAttendingGuest = () =>
-// getUnconfirmedGuest = () =>
+  toggleConfirmationAt = indexToChange =>
+    this.setState({
+      guests: this.state.quests.map((guest, index) => {
+        if (index === indexToChange) {
+          return {
+            ...guest,
+            isConfirmed: !guest.isConfirmed
+          };
+        }
+        return guest;
+      })
+    });
+
+  getTotalInvited = () => this.state.guests.length;
+  // get AttendingGuests = () =>
+  // getUnconfirmedGuests = () =>
 
   render() {
-  return (
+    return (
     <div className="App">
       <header>
         <h1>RSVP</h1>
@@ -54,37 +72,16 @@ getTotalInvited = () => this.state.guest.length;
             </tr>
           </tbody>
         </table>
-        <ul>
-          <li className="pending"><span>Safia</span></li>
-          <li className="responded"><span>Iver</span>
-            <label>
-              <input type="checkbox" checked /> Confirmed
-            </label>
-            <button>edit</button>
-            <button>remove</button>
-          </li>
-          <li className="responded">
-            <span>Corrina</span>
-            <label>
-              <input type="checkbox" checked /> Confirmed
-            </label>
-            <button>edit</button>
-            <button>remove</button>
-          </li>
-          <li>
-            <span>Joel</span>
-            <label>
-              <input type="checkbox" /> Confirmed
-            </label>
-            <button>edit</button>
-            <button>remove</button>
-          </li>
-        </ul>
+
+        <GuestList
+          guests={this.state.guests} 
+          toggleConfirmationAt={this.toggleConfirmationAt}
+        />
+
       </div>
     </div>
-  );
+    );
+  }
 }
-}
-
 
 export default App;
